@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Item from "./componentes/Item";
+import Tarjeta from "./componentes/Tarjeta";
 
 import "./index.css";
 
@@ -15,13 +17,20 @@ function App() {
   const [temaOscuro, setTemaOscuro] = useState(false);
   const [favorita, setFavorita] = useState("");
 
+  console.log(Item.key);
+
 
   const handleTema = () => {
-   
+    if(temaOscuro !== "dark"){
+      setTemaOscuro("dark")
+    } if(temaOscuro === "dark"){
+      setTemaOscuro(false)
+    }
   };
 
   const handleFavorita = () => {
-  
+    setFavorita(Item.key)
+    
   };
 
   return (
@@ -30,9 +39,11 @@ function App() {
       <h2>Contanos, ¿cuál es tu plataforma favorita?</h2>
       { favorita !== "" ? (<h4 className={ favorita === "Twitter" ? "tw" : favorita === "Facebook" ? "fb" : "yt" }> {favorita}</h4>) : ("")}
 
-      {/* 🚩 Implementar acá */}
+      {/* 🚩 Implementar acá */ 
+        <Tarjeta fav={handleFavorita} />
+      }
 
-      <button>Cambiar tema</button>
+      <button onClick={handleTema} >Cambiar tema</button>
     </div>
   );
 }
